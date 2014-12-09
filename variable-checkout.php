@@ -171,7 +171,7 @@ if ( is_woocommerce_active() ) {
         }
         
         
-        if ( ! empty( $this->errors ) ) {
+        if ( empty( $this->errors ) ) {
           $post = array(
             'post_content' => esc_textarea( $_POST['wc_variable_checkout_details'] ),
             'post_status' => "private",
