@@ -156,6 +156,8 @@ if ( is_woocommerce_active() ) {
        * Save variable checkout, creates new product with private status
        */
       public function save_variable_checkout() {
+        $this->errors = array();
+        
         if ( ! isset( $_POST['nonce_variable_checkout'] ) || ! wp_verify_nonce( $_POST['nonce_variable_checkout'], 'nonce_variable_checkout' ) ) {
            $this->errors[] = __( 'Sorry, security check did not verify.', 'wc_variable_checkout' );
         }        
@@ -164,7 +166,7 @@ if ( is_woocommerce_active() ) {
         }
         if ( ! isset( $_POST['wc_variable_checkout_amount'] ) 
           || ! is_numeric( $_POST['wc_variable_checkout_amount'] ) 
-          || (int) $_POST['wc_variable_checkout_amount'] > 0 ) {
+          || (int) $_POST['wc_variable_checkout_amount'] < 0 ) {
           $this->errors[] = __( 'Amount must be numeric and no less than 0.', 'wc_variable_checkout' );
         }
         
